@@ -8,8 +8,13 @@ class CardEditor extends React.Component {
   }
 
   addCard = () => {
-    this.props.addCard(this.state);
-    this.setState({ front: '', back: '' });
+    const { front, back } = this.state;
+    if (front.trim() && back.trim()) {
+      this.props.addCard({ front, back });
+      this.setState({ front: '', back: '' });
+    } else {
+      alert("Both front and back of the card must be filled out.");
+    }
   };
 
   deleteCard = index => this.props.deleteCard(index);
